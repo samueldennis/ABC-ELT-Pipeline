@@ -1,0 +1,1 @@
+This code downloads the raw fiel from the Amazon S3 and loads them into the staging area. 
