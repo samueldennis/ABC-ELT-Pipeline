@@ -1,1 +1,1 @@
-This code downloads the raw fiel from the Amazon S3 and loads them into the staging area. 
+This code downloads the raw file from the Amazon S3 and loads them into the staging area. 
