@@ -1,4 +1,4 @@
-import os
+# Import the required python libraries to interact with Amazon S3 and PostgresSQL
 import csv
 import datetime
 import psycopg2     # This package interacts with the Posgtres database
@@ -7,14 +7,14 @@ from botocore import UNSIGNED
 from botocore.client import Config
 
 # Set up S3 client
-s3 = boto3.client('s3')
+s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
 
 # Set up Postgres connection
-postgres_host = 'my_host'
-postgres_port = 'my_port'
-postgres_db = 'my_db'
-postgres_user = 'wahome'
-postgres_password = '123@678'
+postgres_host = '34.89.230.185'
+postgres_port = '5432'
+postgres_db = 'd2b_accessment'
+postgres_user = 'samundeg7748'
+postgres_password = 'PlyVlfFY5I'
 
 conn = psycopg2.connect(
     host=postgres_host,
@@ -25,7 +25,7 @@ conn = psycopg2.connect(
 )
 
 # Set user_id
-user_id = 'user1234'
+user_id = 'samundeg7748'
 
 # Set the current date
 ingestion_date = datetime.date.today()
@@ -50,9 +50,9 @@ file_paths = [
     'orders_data/shipments_deliveries.csv'
 ]
 
-for file_path in file_paths:
-    file_name = file_path.split('/')[-1]
-    local_file_path = f'path/to/local/directory/{file_name}'  # Specify the local directory to save the files
+for file_path in file_paths:                                 # Iterating over a list of files in the S3 bucket
+    file_name = file_path.split('/')[-1]                     # Extract the file name and select the last component of the list which is the file name itself
+    local_file_path = f'file/path/in/directory/{file_name}'  # Specify the local directory to save the files
     s3.download_file(bucket_name, file_path, local_file_path) # Download files from S3 bucket to local directory
 
     # Load data into staging tables
